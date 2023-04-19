@@ -1,39 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: digoncal <digoncal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/13 17:52:14 by digoncal          #+#    #+#             */
-/*   Updated: 2023/04/19 13:14:50 by digoncal         ###   ########.fr       */
+/*   Created: 2023/04/19 12:32:59 by digoncal          #+#    #+#             */
+/*   Updated: 2023/04/19 13:16:28 by digoncal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#include "../includes/push_swap.h"
 
-/* ---------- LIBRARIES ---------- */
-
-# include <stdlib.h>
-# include <unistd.h>
-# include "libft.h"
-
-/* ---------- STRUCS ---------- */
-
-typedef struct s_stack
+void	exit_msg(char *msg)
 {
-	int				n;
-	struct s_stack	*next;
-}					t_stack;
+	ft_printf("%s\n", msg);
+	exit(0);
+}
 
-/*---------- FUNCTIONS ----------*/
+void	free_array(char **arr)
+{
+	int i;
 
-//utils
-void	check_args(int ac, char **av);
-void	exit_msg(char *msg);
-
-//free
-void	free_array(char **arr);
-
-#endif
+	i = 0;
+	while (arr[i])
+		i++;
+	while (i >= 0)
+		free(arr[i--]);
+}
