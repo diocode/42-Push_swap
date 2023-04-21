@@ -6,7 +6,7 @@
 /*   By: digoncal <digoncal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 17:52:14 by digoncal          #+#    #+#             */
-/*   Updated: 2023/04/19 13:14:50 by digoncal         ###   ########.fr       */
+/*   Updated: 2023/04/21 16:35:50 by digoncal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,12 @@
 
 /* ---------- STRUCS ---------- */
 
-typedef struct s_stack
-{
-	int				n;
-	struct s_stack	*next;
-}					t_stack;
-
 /*---------- FUNCTIONS ----------*/
+
+void	init_stack(t_list **stack, int ac, char **av);
 
 //utils
 void	check_args(int ac, char **av);
-void	exit_msg(char *msg);
 
 //free
 void	free_array(char **arr);

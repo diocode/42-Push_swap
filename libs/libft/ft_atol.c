@@ -1,24 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   ft_atol.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: digoncal <digoncal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/19 12:32:59 by digoncal          #+#    #+#             */
-/*   Updated: 2023/04/19 13:16:28 by digoncal         ###   ########.fr       */
+/*   Created: 2023/04/21 16:00:56 by digoncal          #+#    #+#             */
+/*   Updated: 2023/04/21 16:00:58 by digoncal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/push_swap.h"
+#include "../../includes/libft.h"
 
-void	free_array(char **arr)
+long	ft_atol(const char *nptr)
 {
-	int	i;
+	long	sign;
+	long	res;
 
-	i = 0;
-	while (arr[i])
-		i++;
-	while (i >= 0)
-		free(arr[i--]);
+	while (*nptr == ' ' || (*nptr >= 9 && *nptr <= 13))
+		nptr++;
+	sign = 1;
+	if (*nptr == '-' || *nptr == '+')
+	{
+		if (*nptr == '-')
+			sign = -1;
+		nptr++;
+	}
+	res = 0;
+	while (*nptr >= '0' && *nptr <= '9')
+	{
+		res = res * 10 + (*nptr - '0');
+		nptr++;
+	}
+	return (res * sign);
 }
