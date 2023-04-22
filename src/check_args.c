@@ -6,7 +6,7 @@
 /*   By: digoncal <digoncal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 14:16:38 by digoncal          #+#    #+#             */
-/*   Updated: 2023/04/21 16:28:39 by digoncal         ###   ########.fr       */
+/*   Updated: 2023/04/22 15:57:35 by digoncal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int	check_nbr(char *n)
 	int	i;
 
 	i = 0;
-	if (n[0] == '-')
+	if (n[0] == '-' || n[0] == '+')
 		i++;
 	while (n[i])
 	{
@@ -43,7 +43,7 @@ static int	check_nbr(char *n)
 	return (0);
 }
 
-static void	check_array(char **args, int i)
+static int	check_array(char **args, int i)
 {
 	long	tmp;
 
@@ -51,22 +51,24 @@ static void	check_array(char **args, int i)
 	{
 		tmp = ft_atol(args[i]);
 		if (check_nbr(args[i]))
-			return ;
+			return (1);
 		if (repeat_nbr((int)tmp, args, i))
-			return ;
+			return (1);
 		if (tmp < -2147483648 || tmp > 2147483647)
 		{
 			write(2, "Error\n", 6);
-			return ;
+			return (1);
 		}
 		i++;
 	}
+	return (0);
 }
 
-void	check_args(int ac, char **av)
+int	check_args(int ac, char **av)
 {
 	char	**args;
 	int		i;
+	int		valid;
 
 	i = 0;
 	if (ac == 2)
@@ -76,10 +78,13 @@ void	check_args(int ac, char **av)
 		i = 1;
 		args = av;
 	}
-	check_array(args, i);
+	valid = check_array(args, i);
 	if (ac == 2)
 	{
 		free_array(args);
 		free(args);
 	}
+	if (valid)
+		return (1);
+	return (0);
 }

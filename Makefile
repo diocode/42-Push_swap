@@ -16,7 +16,7 @@ DEPS = libs/libft/libft.a
 
 NAME = push_swap
 
-SRC = src/main.c src/free.c src/check_args.c src/init.c
+SRC = src/main.c src/free.c src/check_args.c src/operations.c
 OBJ = $(SRC:.c=.o)
 
 LIBFT = libs/libft/libft.a
