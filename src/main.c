@@ -6,13 +6,13 @@
 /*   By: digoncal <digoncal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 17:59:14 by digoncal          #+#    #+#             */
-/*   Updated: 2023/04/22 16:37:01 by digoncal         ###   ########.fr       */
+/*   Updated: 2023/04/24 19:10:21 by digoncal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-/*void	test_list(t_list **stack)
+void	test_list(t_list **stack)
 {
 	t_list	*node;
 
@@ -23,7 +23,8 @@
 		node = node->next;
 		ft_printf("%d\n", node->content);
 	}
-}*/
+	ft_printf("-\n");
+}
 
 static void	init_stack(t_list **stack, int ac, char **av)
 {
@@ -58,17 +59,22 @@ int	main(int ac, char **av)
 
 	if (ac < 2)
 		return (1);
-	check_args(ac, av);
+	if (check_args(ac, av))
+		return (1);
 	a_stack = malloc(sizeof(t_list));
-	if (!a_stack)
-		return (1);
 	b_stack = malloc(sizeof(t_list));
-	if (!b_stack)
+	if (!a_stack || !b_stack)
+	{
+		free_data(a_stack, b_stack);
 		return (1);
+	}
 	*a_stack = NULL;
 	*b_stack = NULL;
 	init_stack(a_stack, ac, av);
-//	test_list(a_stack);
+	test_list(a_stack);
+	push(a_stack, b_stack);
+	test_list(a_stack);
+	test_list(b_stack);
 	free_data(a_stack, b_stack);
 	return (0);
 }

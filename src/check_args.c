@@ -6,7 +6,7 @@
 /*   By: digoncal <digoncal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 14:16:38 by digoncal          #+#    #+#             */
-/*   Updated: 2023/04/22 15:57:35 by digoncal         ###   ########.fr       */
+/*   Updated: 2023/04/24 11:37:42 by digoncal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,11 @@ static int	check_nbr(char *n)
 	i = 0;
 	if (n[0] == '-' || n[0] == '+')
 		i++;
+	if (!n[i])
+	{
+		write(2, "Error\n", 6);
+		return (1);
+	}
 	while (n[i])
 	{
 		if (!ft_isdigit(n[i++]))

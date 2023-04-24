@@ -6,7 +6,7 @@
 /*   By: digoncal <digoncal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 12:32:59 by digoncal          #+#    #+#             */
-/*   Updated: 2023/04/22 16:37:55 by digoncal         ###   ########.fr       */
+/*   Updated: 2023/04/24 15:06:39 by digoncal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,7 @@ void	free_array(char **arr)
 
 	i = 0;
 	while (arr[i])
-		i++;
-	while (i >= 0)
-		free(arr[i--]);
+		free(arr[i++]);
 }
 
 void	free_stack(t_list **stack)
