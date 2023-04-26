@@ -6,24 +6,42 @@
 /*   By: digoncal <digoncal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 17:59:14 by digoncal          #+#    #+#             */
-/*   Updated: 2023/04/24 19:10:21 by digoncal         ###   ########.fr       */
+/*   Updated: 2023/04/26 12:40:05 by digoncal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-void	test_list(t_list **stack)
+/*dev test*/
+void	print_stacks(t_list **a_stack, t_list **b_stack)
 {
-	t_list	*node;
+	t_list	*node_a;
+	t_list	*node_b;
 
-	node = (*stack);
-	ft_printf("%d\n", node->content);
-	while (node->next)
+	node_a = (*a_stack);
+	node_b = (*b_stack);
+	ft_printf("\t \t \n");
+	ft_printf("\t  A\t B\n");
+	ft_printf("\t-----  -----\n");
+	while (node_a || node_b)
 	{
-		node = node->next;
-		ft_printf("%d\n", node->content);
+		if (node_a && node_b)
+			ft_printf("\t  %d\t %d\n", (long)node_a->content, (long)
+				node_b->content);
+		else if (node_a)
+			ft_printf("\t  %d\t  \n", (int)(long)node_a->content);
+		else if (node_b)
+			ft_printf("\t   \t %d\n", (int)(long)node_b->content);
+		if (node_a && node_a->next)
+			node_a = node_a->next;
+		else
+			node_a = 0;
+		if (node_b && node_b->next)
+			node_b = node_b->next;
+		else
+			node_b = 0;
 	}
-	ft_printf("-\n");
+	ft_printf("\t \t \n");
 }
 
 static void	init_stack(t_list **stack, int ac, char **av)
@@ -61,8 +79,8 @@ int	main(int ac, char **av)
 		return (1);
 	if (check_args(ac, av))
 		return (1);
-	a_stack = malloc(sizeof(t_list));
-	b_stack = malloc(sizeof(t_list));
+	a_stack = malloc(sizeof(t_list *));
+	b_stack = malloc(sizeof(t_list *));
 	if (!a_stack || !b_stack)
 	{
 		free_data(a_stack, b_stack);
@@ -71,10 +89,9 @@ int	main(int ac, char **av)
 	*a_stack = NULL;
 	*b_stack = NULL;
 	init_stack(a_stack, ac, av);
-	test_list(a_stack);
-	push(a_stack, b_stack);
-	test_list(a_stack);
-	test_list(b_stack);
+	print_stacks(a_stack, b_stack);  /*dev test*/
+	ft_sort(a_stack, b_stack);
+	print_stacks(a_stack, b_stack);  /*dev test*/
 	free_data(a_stack, b_stack);
 	return (0);
 }
