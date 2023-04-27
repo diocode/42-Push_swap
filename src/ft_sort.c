@@ -6,7 +6,7 @@
 /*   By: digoncal <digoncal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 11:43:47 by digoncal          #+#    #+#             */
-/*   Updated: 2023/04/26 16:32:36 by digoncal         ###   ########.fr       */
+/*   Updated: 2023/04/27 14:53:09 by digoncal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,22 +19,12 @@
  -> operation()
  -> sort_2
  -> sort_3
+ -> utils.c and functions
+ -> starting/ testing sorting algorithm
 
  */
 
-static int	is_sorted(t_list **stack)
-{
-	t_list	*node;
-
-	node = (*stack);
-	while (node->next && node->content < node->next->content)
-		node = node->next;
-	if (node->next)
-		return (0);
-	return (1);
-}
-
-static void	sort_2(t_list **a_stack)
+void	sort_2(t_list **a_stack)
 {
 	t_list	*node;
 
@@ -44,7 +34,7 @@ static void	sort_2(t_list **a_stack)
 			operation(a_stack, NULL, "sa");
 }
 
-static void	sort_3(t_list **a_stack)
+void	sort_3(t_list **a_stack)
 {
 	t_list	*node;
 
@@ -74,20 +64,17 @@ static void	sort_3(t_list **a_stack)
 
 void	ft_sort(t_list **a_stack, t_list **b_stack)
 {
-	t_list	*node;
-
-	node = (*a_stack);
 	if (is_sorted(a_stack))
 		return ;
-	if (!node->next->next)
+	if (stack_len(a_stack) == 2)
 	{
 		sort_2(a_stack);
 		return ;
 	}
-	if (!node->next->next->next)
+	if (stack_len(a_stack) == 3)
 	{
 		sort_3(a_stack);
 		return ;
 	}
-	(void) b_stack;
+	sort_algorithm(a_stack, b_stack);
 }

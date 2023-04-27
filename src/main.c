@@ -6,7 +6,7 @@
 /*   By: digoncal <digoncal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 17:59:14 by digoncal          #+#    #+#             */
-/*   Updated: 2023/04/26 12:40:05 by digoncal         ###   ########.fr       */
+/*   Updated: 2023/04/27 14:44:50 by digoncal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,9 @@ int	main(int ac, char **av)
 	*b_stack = NULL;
 	init_stack(a_stack, ac, av);
 	print_stacks(a_stack, b_stack);  /*dev test*/
+	ft_printf("---- Operations ----\n");  /*dev test*/
 	ft_sort(a_stack, b_stack);
+	ft_printf("--------------------\n");  /*dev test*/
 	print_stacks(a_stack, b_stack);  /*dev test*/
 	free_data(a_stack, b_stack);
 	return (0);
