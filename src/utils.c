@@ -6,7 +6,7 @@
 /*   By: digoncal <digoncal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 17:00:26 by digoncal          #+#    #+#             */
-/*   Updated: 2023/04/27 17:02:27 by digoncal         ###   ########.fr       */
+/*   Updated: 2023/04/28 12:55:36 by digoncal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,3 +53,18 @@ int	is_sorted(t_list **stack)
 		return (0);
 	return (1);
 }
+
+void	small_first(t_list **stack1, t_list **stack2)
+{
+	while ((*stack1)->content > (*stack1)->next->content)
+		operation(stack1, stack2, "ra");
+	print_stacks(stack1, stack2);
+	exit(1);
+}
+/*
+5  2
+3  4
+2  1
+4  5
+1  3
+*/

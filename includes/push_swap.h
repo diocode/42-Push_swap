@@ -20,16 +20,19 @@
 /*---------- FUNCTIONS ----------*/
 
 int		operation(t_list **stack1, t_list **stack2, char *op);
-void	ft_sort(t_list **stack_a, t_list **stack_b);
+void	quick_sort(t_list **stack_a, t_list **stack_b);
 void	sort_algorithm(t_list **a_stack, t_list **b_stack);
 void	sort_2(t_list **a_stack);
 void	sort_3(t_list **a_stack);
+void	sort_5(t_list **a_stack, t_list **b_stack);
 
 //utils
 int		check_args(int ac, char **av);
 long	stack_len(t_list **stack);
 int		is_sorted(t_list **stack);
 void	*average(t_list **stack);
+void	small_first(t_list **a_stack, t_list **b_stack);
+
 
 //free
 void	free_array(char **arr);
