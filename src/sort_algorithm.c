@@ -26,10 +26,10 @@ static void	sorting(t_list **stack1, t_list **stack2)
 	node = (*stack1);
 	while (node->next)
 	{
-		if (node->content > average(stack1))
+		if ((int)(long)node->content > (int)(long)average(stack1))
 			operation(stack1, stack2, "ra");
 		else
-			operation(stack1, stack2, "pa");
+			operation(stack1, stack2, "pb");
 		node = (*stack1);
 		if (node->next)
 			node = node->next;

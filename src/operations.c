@@ -6,7 +6,7 @@
 /*   By: digoncal <digoncal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 17:16:05 by digoncal          #+#    #+#             */
-/*   Updated: 2023/04/28 11:31:50 by digoncal         ###   ########.fr       */
+/*   Updated: 2023/04/28 19:01:48 by digoncal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,9 +97,9 @@ int	operation(t_list **a_stack, t_list **b_stack, char *op)
 		success = swap(b_stack);
 	}
 	if (ft_strncmp("pa", op, 3) == 0)
-		success = push(a_stack, b_stack);
-	else if (ft_strncmp("pb", op, 3) == 0)
 		success = push(b_stack, a_stack);
+	else if (ft_strncmp("pb", op, 3) == 0)
+		success = push(a_stack, b_stack);
 	if (ft_strncmp("ra", op, 3) == 0)
 		success = rotate(a_stack);
 	else if (ft_strncmp("rb", op, 3) == 0)

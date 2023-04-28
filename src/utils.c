@@ -6,7 +6,7 @@
 /*   By: digoncal <digoncal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 17:00:26 by digoncal          #+#    #+#             */
-/*   Updated: 2023/04/28 12:55:36 by digoncal         ###   ########.fr       */
+/*   Updated: 2023/04/28 18:42:51 by digoncal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,24 +47,30 @@ int	is_sorted(t_list **stack)
 	t_list	*node;
 
 	node = (*stack);
-	while (node->next && node->content < node->next->content)
+	while (node->next && (int)(long)node->content <
+		(int)(long)node->next->content)
 		node = node->next;
 	if (node->next)
 		return (0);
 	return (1);
 }
 
-void	small_first(t_list **stack1, t_list **stack2)
+void	small_first(t_list **a_stack)
 {
-	while ((*stack1)->content > (*stack1)->next->content)
-		operation(stack1, stack2, "ra");
-	print_stacks(stack1, stack2);
-	exit(1);
+	t_list	*node;
+
+	while ((int)(long)(*a_stack)->content >
+	(int)(long)(*a_stack)->next->content)
+		operation(a_stack, NULL, "ra");
+	node = (*a_stack);
+	while (node->next)
+	{
+		node = node->next;
+		if ((int)(long)(*a_stack)->content > (int)(long)node->content)
+		{
+			operation(a_stack, NULL, "ra");
+			small_first(a_stack);
+			return ;
+		}
+	}
 }
-/*
-5  2
-3  4
-2  1
-4  5
-1  3
-*/
