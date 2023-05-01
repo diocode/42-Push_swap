@@ -52,17 +52,13 @@ void	sort_3(t_list **stack)
 
 void	sort_5(t_list **a_stack, t_list **b_stack)
 {
-	small_first(a_stack);
-	operation(a_stack, b_stack, "pb");
-	if (stack_len(a_stack) == 4)
-	{
-		small_first(a_stack);
-		operation(a_stack, b_stack, "pb");
-	}
+	if (stack_len(a_stack) == 5)
+		min_to_b(a_stack, b_stack);
+	min_to_b(a_stack, b_stack);
 	sort_3(a_stack);
-	operation(a_stack, b_stack, "pa");
-	if (stack_len(a_stack) == 4)
+	if (stack_len(b_stack) == 2)
 		operation(a_stack, b_stack, "pa");
+	operation(a_stack, b_stack, "pa");
 }
 
 void	quick_sort(t_list **a_stack, t_list **b_stack)

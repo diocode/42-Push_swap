@@ -32,6 +32,8 @@ long	stack_len(t_list **stack);
 int		is_sorted(t_list **stack);
 void	*average(t_list **stack);
 void	small_first(t_list **a_stack);
+void	*find_min(t_list **stack);
+void	min_to_b(t_list **a_stack, t_list **b_stack);
 
 //free
 void	free_array(char **arr);

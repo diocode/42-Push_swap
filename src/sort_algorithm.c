@@ -6,7 +6,7 @@
 /*   By: digoncal <digoncal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 11:54:44 by digoncal          #+#    #+#             */
-/*   Updated: 2023/04/27 17:09:44 by digoncal         ###   ########.fr       */
+/*   Updated: 2023/05/01 14:43:40 by digoncal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,7 @@ static void	sorting(t_list **stack1, t_list **stack2)
 
 void	sort_algorithm(t_list **a_stack, t_list **b_stack)
 {
-	sorting(a_stack, b_stack);
-	if (stack_len(a_stack) == 3)
-		sort_3(a_stack);
-	if (stack_len(a_stack) == 2)
-		sort_2(a_stack);
+	quick_sort(a_stack, b_stack);
+	if(0)
+		sorting(a_stack, b_stack);
 }

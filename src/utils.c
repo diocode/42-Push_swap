@@ -6,7 +6,7 @@
 /*   By: digoncal <digoncal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 17:00:26 by digoncal          #+#    #+#             */
-/*   Updated: 2023/04/28 18:42:51 by digoncal         ###   ########.fr       */
+/*   Updated: 2023/05/01 16:50:50 by digoncal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ void	*average(t_list **stack)
 		total += (long)node->content;
 		node = node->next;
 	}
-	return ((void *)(long)(total / 2));
+	total += (long)node->content;
+	return ((void *)(long)(total / stack_len(stack)));
 }
 
 int	is_sorted(t_list **stack)
@@ -55,22 +56,42 @@ int	is_sorted(t_list **stack)
 	return (1);
 }
 
-void	small_first(t_list **a_stack)
+void	*find_min(t_list **stack)
 {
-	t_list	*node;
+	t_list	*min;
+	t_list	*cmp;
+	t_list	*last;
 
-	while ((int)(long)(*a_stack)->content >
-	(int)(long)(*a_stack)->next->content)
-		operation(a_stack, NULL, "ra");
-	node = (*a_stack);
-	while (node->next)
+	min = (*stack);
+	cmp = min->next;
+	last = ft_lstlast((*stack));
+	while (min->next && cmp->next)
 	{
-		node = node->next;
-		if ((int)(long)(*a_stack)->content > (int)(long)node->content)
+		if ((int)(long)min->content > (int)(long)cmp->content)
 		{
-			operation(a_stack, NULL, "ra");
-			small_first(a_stack);
-			return ;
+			min = cmp;
+			cmp = cmp->next;
 		}
+		else
+			cmp = cmp->next;
 	}
+	if ((int)(long)min->content > (int)(long)last->content)
+		min = last;
+	return (min->content);
+}
+
+void	min_to_b(t_list **a_stack, t_list **b_stack)
+{
+	void	*min;
+
+	min = find_min(a_stack);
+	while ((int)(long)(*a_stack)->content != (int)(long)min)
+	{
+		if ((int)(long)(*a_stack)->content != (int)(long)min &&
+		(int)(long)(*a_stack)->next->content != (int)(long)min)
+			operation(a_stack, b_stack, "rra");
+		else
+			operation(a_stack, b_stack, "ra");
+	}
+	operation(a_stack, b_stack, "pb");
 }
