@@ -6,17 +6,17 @@
 /*   By: digoncal <digoncal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 17:59:14 by digoncal          #+#    #+#             */
-/*   Updated: 2023/05/01 15:48:17 by digoncal         ###   ########.fr       */
+/*   Updated: 2023/05/04 17:00:34 by digoncal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
 /*dev test*/
-void	print_stacks(t_list **a_stack, t_list **b_stack)
+void	print_stacks(t_stack **a_stack, t_stack **b_stack)
 {
-	t_list	*node_a;
-	t_list	*node_b;
+	t_stack	*node_a;
+	t_stack	*node_b;
 
 	node_a = (*a_stack);
 	node_b = (*b_stack);
@@ -44,9 +44,9 @@ void	print_stacks(t_list **a_stack, t_list **b_stack)
 	ft_printf("\t \t \n");
 }
 
-static void	init_stack(t_list **stack, int ac, char **av)
+static void	init_stack(t_stack **stack, int ac, char **av)
 {
-	t_list	*node;
+	t_stack	*node;
 	char	**args;
 	int		i;
 
@@ -60,27 +60,24 @@ static void	init_stack(t_list **stack, int ac, char **av)
 	}
 	while (args[i])
 	{
-		node = ft_lstnew((void *)(long)ft_atoi(args[i++]));
-		ft_lstadd_back(stack, node);
+		node = ps_lstnew((void *)(long)ft_atoi(args[i++]));
+		ps_lstadd_back(stack, node);
 	}
 	if (ac == 2)
-	{
 		free_array(args);
-		free(args);
-	}
 }
 
 int	main(int ac, char **av)
 {
-	t_list	**a_stack;
-	t_list	**b_stack;
+	t_stack	**a_stack;
+	t_stack	**b_stack;
 
 	if (ac < 2)
 		return (1);
 	if (check_args(ac, av))
 		return (1);
-	a_stack = malloc(sizeof(t_list *));
-	b_stack = malloc(sizeof(t_list *));
+	a_stack = malloc(sizeof(t_stack *));
+	b_stack = malloc(sizeof(t_stack *));
 	if (!a_stack || !b_stack)
 	{
 		free_data(a_stack, b_stack);
@@ -91,7 +88,7 @@ int	main(int ac, char **av)
 	init_stack(a_stack, ac, av);
 	print_stacks(a_stack, b_stack);  /*dev test*/
 	ft_printf("---- Operations ----\n");  /*dev test*/
-	sort_algorithm(a_stack, b_stack);
+	sort_algo(a_stack, b_stack);
 	ft_printf("--------------------\n");  /*dev test*/
 	print_stacks(a_stack, b_stack);  /*dev test*/
 	free_data(a_stack, b_stack);

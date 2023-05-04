@@ -6,46 +6,15 @@
 /*   By: digoncal <digoncal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 17:00:26 by digoncal          #+#    #+#             */
-/*   Updated: 2023/05/01 16:50:50 by digoncal         ###   ########.fr       */
+/*   Updated: 2023/05/02 16:24:35 by digoncal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-long	stack_len(t_list **stack)
+int	is_sorted(t_stack **stack)
 {
-	t_list	*node;
-	long	total;
-
-	node = (*stack);
-	total = 1;
-	while (node->next)
-	{
-		node = node->next;
-		total++;
-	}
-	return (total);
-}
-
-void	*average(t_list **stack)
-{
-	t_list	*node;
-	long	total;
-
-	node = (*stack);
-	total = 0;
-	while (node->next)
-	{
-		total += (long)node->content;
-		node = node->next;
-	}
-	total += (long)node->content;
-	return ((void *)(long)(total / stack_len(stack)));
-}
-
-int	is_sorted(t_list **stack)
-{
-	t_list	*node;
+	t_stack	*node;
 
 	node = (*stack);
 	while (node->next && (int)(long)node->content <
@@ -56,15 +25,15 @@ int	is_sorted(t_list **stack)
 	return (1);
 }
 
-void	*find_min(t_list **stack)
+void	*find_min(t_stack **stack)
 {
-	t_list	*min;
-	t_list	*cmp;
-	t_list	*last;
+	t_stack	*min;
+	t_stack	*cmp;
+	t_stack	*last;
 
 	min = (*stack);
 	cmp = min->next;
-	last = ft_lstlast((*stack));
+	last = ps_lstlast((*stack));
 	while (min->next && cmp->next)
 	{
 		if ((int)(long)min->content > (int)(long)cmp->content)
@@ -80,18 +49,26 @@ void	*find_min(t_list **stack)
 	return (min->content);
 }
 
-void	min_to_b(t_list **a_stack, t_list **b_stack)
+void	*find_max(t_stack **stack)
 {
-	void	*min;
+	t_stack	*max;
+	t_stack	*cmp;
+	t_stack	*last;
 
-	min = find_min(a_stack);
-	while ((int)(long)(*a_stack)->content != (int)(long)min)
+	max = (*stack);
+	cmp = max->next;
+	last = ps_lstlast((*stack));
+	while (max->next && cmp->next)
 	{
-		if ((int)(long)(*a_stack)->content != (int)(long)min &&
-		(int)(long)(*a_stack)->next->content != (int)(long)min)
-			operation(a_stack, b_stack, "rra");
+		if ((int)(long)max->content < (int)(long)cmp->content)
+		{
+			max = cmp;
+			cmp = cmp->next;
+		}
 		else
-			operation(a_stack, b_stack, "ra");
+			cmp = cmp->next;
 	}
-	operation(a_stack, b_stack, "pb");
+	if ((int)(long)max->content < (int)(long)last->content)
+		max = last;
+	return (max->content);
 }

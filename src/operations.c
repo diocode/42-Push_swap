@@ -13,7 +13,7 @@
 #include "../includes/push_swap.h"
 
 /* Swap the first 2 elements at the top of stack */
-static int	swap(t_list **stack)
+static int	swap(t_stack **stack)
 {
 	void	*content;
 
@@ -28,17 +28,17 @@ static int	swap(t_list **stack)
 }
 
 /* Take the first element at the top and put it at the top of the other stack */
-static int	push(t_list **stack1, t_list **stack2)
+static int	push(t_stack **stack1, t_stack **stack2)
 {
-	t_list	*node_1;
-	t_list	*node_2;
+	t_stack	*node_1;
+	t_stack	*node_2;
 
 	if ((*stack1))
 	{
 		node_1 = (*stack1);
-		node_2 = ft_lstnew((*stack1)->content);
+		node_2 = ps_lstnew((*stack1)->content);
 		if ((*stack2))
-			ft_lstadd_front(stack2, node_2);
+			ps_lstadd_front(stack2, node_2);
 		else
 			(*stack2) = node_2;
 		(*stack1) = (*stack1)->next;
@@ -49,40 +49,40 @@ static int	push(t_list **stack1, t_list **stack2)
 }
 
 /* Shift UP all elements of a stack by 1 */
-static int	rotate(t_list **stack)
+static int	rotate(t_stack **stack)
 {
-	t_list	*node;
+	t_stack	*node;
 
 	if ((*stack))
 	{
 		node = (*stack);
 		(*stack) = (*stack)->next;
-		ft_lstadd_back(stack, node);
+		ps_lstadd_back(stack, node);
 		node->next = NULL;
 	}
 	return (1);
 }
 
 /* Shift DOWN all elements of a stack by 1 */
-static int	rev_rotate(t_list **stack)
+static int	rev_rotate(t_stack **stack)
 {
-	t_list	*node;
-	t_list	*tmp;
+	t_stack	*node;
+	t_stack	*tmp;
 
 	if ((*stack))
 	{
 		tmp = (*stack);
 		while (tmp->next->next)
 			tmp = tmp->next;
-		node = ft_lstlast((*stack));
-		ft_lstadd_front(stack, node);
+		node = ps_lstlast((*stack));
+		ps_lstadd_front(stack, node);
 		tmp->next = NULL;
 	}
 	return (1);
 }
 
 /*Choose and exec. the operations*/
-int	operation(t_list **a_stack, t_list **b_stack, char *op)
+int	operation(t_stack **a_stack, t_stack **b_stack, char *op)
 {
 	int	success;
 

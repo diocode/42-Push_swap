@@ -84,11 +84,13 @@ int	check_args(int ac, char **av)
 		args = av;
 	}
 	valid = check_array(args, i);
-	if (ac == 2)
+	if (!args[0])
 	{
 		free_array(args);
-		free(args);
+		return (1);
 	}
+	if (ac == 2)
+		free_array(args);
 	if (valid)
 		return (1);
 	return (0);
