@@ -86,11 +86,11 @@ int	main(int ac, char **av)
 	*a_stack = NULL;
 	*b_stack = NULL;
 	init_stack(a_stack, ac, av);
-	print_stacks(a_stack, b_stack);  /*dev test*/
-	ft_printf("---- Operations ----\n");  /*dev test*/
+	//print_stacks(a_stack, b_stack);  /*dev test*/
+	//ft_printf("---- Operations ----\n");  /*dev test*/
 	sort_algo(a_stack, b_stack);
-	ft_printf("--------------------\n");  /*dev test*/
-	print_stacks(a_stack, b_stack);  /*dev test*/
+	//ft_printf("--------------------\n");  /*dev test*/
+	//print_stacks(a_stack, b_stack);  /*dev test*/
 	free_data(a_stack, b_stack);
 	return (0);
 }

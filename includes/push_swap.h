@@ -16,6 +16,7 @@
 /* ---------- LIBRARIES ---------- */
 
 # include "libft.h"
+# include <limits.h>
 
 /*------------- Strutures ---------------*/
 
