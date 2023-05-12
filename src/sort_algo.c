@@ -91,7 +91,8 @@ static t_stack	*lowest_cost(t_stack **a_stack, t_stack **b_stack)
 	while (tmp)
 	{
 		moves = cost_a(tmp, a_stack) + cost_b1(tmp, b_stack);
-		if (lowest_cost > moves)
+		if (lowest_cost >= moves
+			&& (int)(long)tmp->content > (int)(long)node->content)
 		{
 			lowest_cost = moves;
 			node = tmp;
@@ -110,7 +111,10 @@ static char *sort_b2(t_stack *node, t_stack **b_stack)
 	tmp = (*b_stack)->next;
 	if ((int)(long)node->content < (int)(long)(*b_stack)->content
 		&& (int)(long)ps_lstlast(*b_stack)->content ==
-		(int)(long)find_min(b_stack))
+		(int)(long)find_min(b_stack) && ps_lstsize(*b_stack) == 2)
+		return (NULL);
+	if ((int)(long)node->content > (int)(long)(*b_stack)->content
+		&& (int)(long)node->content < (int)(long)ps_lstlast(*b_stack)->content)
 		return (NULL);
 	while (tmp->next && !((int)(long)node->content < (int)(long)tmp->content
 	&& (int)(long)node->content > (int)(long)tmp->prev->content))
@@ -145,7 +149,8 @@ static void	sort_b1(t_stack *node, t_stack **a_stack, t_stack **b_stack)
 		}
 		if (moves >= ps_lstsize(*b_stack) / 2)
 			op = "rrb";
-		op = "rb";
+		else
+			op = "rb";
 	}
 	else
 	{
@@ -154,8 +159,11 @@ static void	sort_b1(t_stack *node, t_stack **a_stack, t_stack **b_stack)
 	}
 	if (!op)
 		return ;
-	while (moves--)
+	while (moves >= 0)
+	{
 		operation(a_stack, b_stack, op);
+		moves--;
+	}
 }
 
 static void	push_b(t_stack *node, t_stack **a_stack, t_stack **b_stack)
@@ -173,7 +181,8 @@ static void	push_b(t_stack *node, t_stack **a_stack, t_stack **b_stack)
 	}
 	if (moves >= ps_lstsize(*a_stack) / 2)
 		op = "rra";
-	op = "ra";
+	else
+		op = "ra";
 	while ((int)(long)node->content != (int)(long)(*a_stack)->content)
 		operation(a_stack, b_stack, op);
 	sort_b1(node, a_stack, b_stack);
@@ -195,7 +204,8 @@ static void	push_a(t_stack **a_stack, t_stack **b_stack)
 	}
 	if (pos >= ps_lstsize(*b_stack) / 2)
 		op = "rrb";
-	op = "rb";
+	else
+		op = "rb";
 	while ((int)(long)(*b_stack)->content != (int)(long)find_max(b_stack))
 		operation(a_stack, b_stack, op);
 	operation(a_stack, b_stack, "pa");
