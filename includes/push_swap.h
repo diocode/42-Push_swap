@@ -6,7 +6,7 @@
 /*   By: digoncal <digoncal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 17:52:14 by digoncal          #+#    #+#             */
-/*   Updated: 2023/05/02 13:55:16 by digoncal         ###   ########.fr       */
+/*   Updated: 2023/05/16 14:52:59 by digoncal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	sort_3(t_stack **a_stack);
 void	sort_5(t_stack **a_stack, t_stack **b_stack);
 
 //utils
+t_stack	*lowest_cost(t_stack **stack, int max, int min);
 int		check_args(int ac, char **av);
 int		is_sorted(t_stack **stack);
 void	*find_min(t_stack **stack);

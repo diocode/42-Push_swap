@@ -6,7 +6,7 @@
 /*   By: digoncal <digoncal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 11:43:47 by digoncal          #+#    #+#             */
-/*   Updated: 2023/05/02 16:43:25 by digoncal         ###   ########.fr       */
+/*   Updated: 2023/05/16 18:27:56 by digoncal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,5 +87,4 @@ void	quick_sort(t_stack **a_stack, t_stack **b_stack)
 		sort_3(a_stack);
 	else if (ps_lstsize(*a_stack) == 4 || ps_lstsize(*a_stack) == 5)
 		sort_5(a_stack, b_stack);
-	return ;
 }

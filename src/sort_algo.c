@@ -6,226 +6,104 @@
 /*   By: digoncal <digoncal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 16:36:11 by digoncal          #+#    #+#             */
-/*   Updated: 2023/05/09 18:27:14 by digoncal         ###   ########.fr       */
+/*   Updated: 2023/05/16 16:25:58 by digoncal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-static int	cost_b2(t_stack *node, t_stack **b_stack)
-{
-	int		moves;
-	t_stack	*tmp;
-
-	moves = 1;
-	tmp = (*b_stack)->next;
-	if ((int)(long)node->content < (int)(long)(*b_stack)->content
-		&& (int)(long)ps_lstlast(*b_stack)->content ==
-		(int)(long)find_min(b_stack))
-		return (0);
-	while (tmp->next && !((int)(long)node->content < (int)(long)tmp->content
-	&& (int)(long)node->content > (int)(long)tmp->prev->content))
-	{
-		moves++;
-		tmp = tmp->next;
-	}
-	if (moves >= ps_lstsize(*b_stack) / 2)
-		moves = ps_lstsize(*b_stack) - moves;
-	return (moves);
-}
-
-static int	cost_b1(t_stack *node, t_stack **b_stack)
-{
-	int		moves;
-	t_stack	*tmp;
-
-	moves = 0;
-	tmp = (*b_stack);
-	if ((int)(long)node->content > (int)(long)find_max(b_stack)
-	|| (int)(long)node->content < (int)(long)find_min(b_stack))
-	{
-		if ((int)(long)ps_lstlast(*b_stack)->content ==
-		(int)(long)find_min(b_stack) && ps_lstsize(*b_stack) == 2)
-			return (0);
-		while (tmp->next
-			&& (int)(long)tmp->content != (int)(long)find_min(b_stack))
-		{
-			moves++;
-			tmp = tmp->next;
-		}
-		if (moves >= ps_lstsize(*b_stack) / 2)
-			moves = ps_lstsize(*b_stack) - moves;
-	}
-	else
-		moves = cost_b2(node, b_stack);
-	return (moves);
-}
-
-static int	cost_a(t_stack *node, t_stack **a_stack)
-{
-	t_stack		*tmp;
-	int			moves;
-
-	tmp = (*a_stack);
-	moves = 0;
-	while ((int)(long)node->content != (int)(long)tmp->content)
-	{
-		moves++;
-		tmp = tmp->next;
-	}
-	if (moves >= ps_lstsize(*a_stack) / 2)
-		moves = ps_lstsize(*a_stack) - moves;
-	return (moves);
-}
-
-static t_stack	*lowest_cost(t_stack **a_stack, t_stack **b_stack)
+static void	order_stack(t_stack **a_stack, t_stack **b_stack)
 {
 	t_stack	*node;
-	t_stack	*tmp;
-	int		lowest_cost;
-	int		moves;
-
-	node = (*a_stack);
-	tmp = (*a_stack);
-	lowest_cost = INT_MAX;
-	while (tmp)
-	{
-		moves = cost_a(tmp, a_stack) + cost_b1(tmp, b_stack);
-		if (lowest_cost >= moves
-			&& (int)(long)tmp->content > (int)(long)node->content)
-		{
-			lowest_cost = moves;
-			node = tmp;
-		}
-		tmp = tmp->next;
-	}
-	return (node);
-}
-
-static char *sort_b2(t_stack *node, t_stack **b_stack)
-{
-	int		moves;
-	t_stack	*tmp;
-
-	moves = 1;
-	tmp = (*b_stack)->next;
-	if ((int)(long)node->content < (int)(long)(*b_stack)->content
-		&& (int)(long)ps_lstlast(*b_stack)->content ==
-		(int)(long)find_min(b_stack) && ps_lstsize(*b_stack) == 2)
-		return (NULL);
-	if ((int)(long)node->content > (int)(long)(*b_stack)->content
-		&& (int)(long)node->content < (int)(long)ps_lstlast(*b_stack)->content)
-		return (NULL);
-	while (tmp->next && !((int)(long)node->content < (int)(long)tmp->content
-	&& (int)(long)node->content > (int)(long)tmp->prev->content))
-	{
-		moves++;
-		tmp = tmp->next;
-	}
-	if (moves >= ps_lstsize(*b_stack) / 2)
-		return ("rrb");
-	return ("rb");
-}
-
-static void	sort_b1(t_stack *node, t_stack **a_stack, t_stack **b_stack)
-{
-	int		moves;
-	t_stack	*tmp;
+	int		mv;
 	char	*op;
 
-	moves = 0;
-	tmp = (*b_stack);
-	if ((int)(long)node->content > (int)(long)find_max(b_stack)
-		|| (int)(long)node->content < (int)(long)find_min(b_stack))
+	while (ps_lstsize(*b_stack))
 	{
-		if ((int)(long)ps_lstlast(*b_stack)->content ==
-			(int)(long)find_min(b_stack) && ps_lstsize(*b_stack) == 2)
-			return ;
-		while (tmp->next
-			&& (int)(long)tmp->content != (int)(long)find_min(b_stack))
+		node = (*b_stack);
+		mv = 0;
+		while ((int)(long)node->content != (int)(long)find_max(b_stack))
 		{
-			moves++;
-			tmp = tmp->next;
+			mv++;
+			node = node->next;
 		}
-		if (moves >= ps_lstsize(*b_stack) / 2)
+		if (mv >= ps_lstsize(*b_stack) / 2)
 			op = "rrb";
 		else
 			op = "rb";
-	}
-	else
-	{
-		op = sort_b2(node, b_stack);
-		moves = cost_b1(node, b_stack);
-	}
-	if (!op)
-		return ;
-	while (moves >= 0)
-	{
-		operation(a_stack, b_stack, op);
-		moves--;
+		while ((int)(long)(*b_stack)->content != (int)(long)find_max(b_stack))
+			operation(a_stack, b_stack, op);
+		operation(a_stack, b_stack, "pa");
 	}
 }
 
-static void	push_b(t_stack *node, t_stack **a_stack, t_stack **b_stack)
+static void	push_to_b(t_stack *node, t_stack **a_stack, t_stack **b_stack)
 {
 	t_stack	*tmp;
-	int		moves;
+	int		mv;
 	char	*op;
 
 	tmp = (*a_stack);
-	moves = 0;
-	while ((int)(long)node->content != (int)(long)tmp->content)
+	mv = 0;
+	while (tmp->next && (int)(long)node->content != (int)(long)tmp->content)
 	{
-		moves++;
+		mv++;
 		tmp = tmp->next;
 	}
-	if (moves >= ps_lstsize(*a_stack) / 2)
+	if (mv >= ps_lstsize(*a_stack) / 2)
+	{
 		op = "rra";
+		mv = ps_lstsize(*a_stack) - mv;
+	}
 	else
 		op = "ra";
-	while ((int)(long)node->content != (int)(long)(*a_stack)->content)
+	while (mv--)
 		operation(a_stack, b_stack, op);
-	sort_b1(node, a_stack, b_stack);
 	operation(a_stack, b_stack, "pb");
 }
 
-static void	push_a(t_stack **a_stack, t_stack **b_stack)
+static void	push_chunk(t_stack **a_stack, t_stack **b_stack, int chunk_range)
 {
 	t_stack	*node;
-	int		pos;
-	char	*op;
+	int		max;
+	int		min;
 
-	node = (*b_stack);
-	pos = 0;
-	while ((int)(long)node->content != (int)(long)find_max(b_stack))
+	if (!(*a_stack))
+		return ;
+	max = (int)(long)find_min(a_stack) + chunk_range;
+	min = (int)(long)find_min(a_stack);
+	node = (*a_stack);
+	while (node)
 	{
-		pos++;
-		node = node->next;
+		if ((int)(long)node->content < max
+			&& (int)(long)node->content >= min)
+		{
+			push_to_b(lowest_cost(a_stack, max, min), a_stack, b_stack);
+			node = (*a_stack);
+		}
+		else
+			node = node->next;
 	}
-	if (pos >= ps_lstsize(*b_stack) / 2)
-		op = "rrb";
-	else
-		op = "rb";
-	while ((int)(long)(*b_stack)->content != (int)(long)find_max(b_stack))
-		operation(a_stack, b_stack, op);
-	operation(a_stack, b_stack, "pa");
 }
 
 void	sort_algo(t_stack **a_stack, t_stack **b_stack)
 {
-	int	size;
+	int	i;
+	int	chunk_amount;
+	int	chunk_range;
+	int	count;
 
 	quick_sort(a_stack, b_stack);
 	if (is_sorted(a_stack))
 		return ;
-	operation(a_stack, b_stack, "pb");
-	operation(a_stack, b_stack, "pb");
-	if ((int)(long)(*b_stack)->content < (int)(long)(*b_stack)->next->content)
-		operation(a_stack, b_stack, "rb");
-	size = ps_lstsize(*a_stack);
-	while (size--)
-		push_b(lowest_cost(a_stack, b_stack), a_stack, b_stack);
-	size = ps_lstsize(*b_stack);
-	while (size--)
-		push_a(a_stack, b_stack);
+	i = 0;
+	count = ps_lstsize(*a_stack);
+	if (count > 100)
+		chunk_amount = count / 30;
+	else
+		chunk_amount = count / 10;
+	chunk_range = ((int)(long)find_max(a_stack) / chunk_amount) + 1;
+	while (++i <= chunk_amount)
+		push_chunk(a_stack, b_stack, chunk_range);
+	order_stack(a_stack, b_stack);
 }

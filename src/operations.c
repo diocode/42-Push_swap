@@ -6,7 +6,7 @@
 /*   By: digoncal <digoncal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 17:16:05 by digoncal          #+#    #+#             */
-/*   Updated: 2023/04/28 19:01:48 by digoncal         ###   ########.fr       */
+/*   Updated: 2023/05/16 18:26:52 by digoncal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static int	rev_rotate(t_stack **stack)
 	t_stack	*node;
 	t_stack	*tmp;
 
-	if ((*stack))
+	if ((*stack) && (*stack)->next)
 	{
 		tmp = (*stack);
 		while (tmp->next->next)
@@ -91,11 +91,6 @@ int	operation(t_stack **a_stack, t_stack **b_stack, char *op)
 		success = swap(a_stack);
 	else if (ft_strncmp("sb", op, 3) == 0)
 		success = swap(b_stack);
-	else if (ft_strncmp("ss", op, 3) == 0)
-	{
-		success = swap(a_stack);
-		success = swap(b_stack);
-	}
 	if (ft_strncmp("pa", op, 3) == 0)
 		success = push(b_stack, a_stack);
 	else if (ft_strncmp("pb", op, 3) == 0)
@@ -104,20 +99,10 @@ int	operation(t_stack **a_stack, t_stack **b_stack, char *op)
 		success = rotate(a_stack);
 	else if (ft_strncmp("rb", op, 3) == 0)
 		success = rotate(b_stack);
-	else if (ft_strncmp("rr", op, 3) == 0)
-	{
-		success = rotate(a_stack);
-		success = rotate(b_stack);
-	}
 	if (ft_strncmp("rra", op, 4) == 0)
 		success = rev_rotate(a_stack);
 	else if (ft_strncmp("rrb", op, 4) == 0)
 		success = rev_rotate(b_stack);
-	else if (ft_strncmp("rra", op, 4) == 0)
-	{
-		success = rev_rotate(a_stack);
-		success = rev_rotate(b_stack);
-	}
 	if (success)
 	{
 		ft_printf("%s\n", op);
