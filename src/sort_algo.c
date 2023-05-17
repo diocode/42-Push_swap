@@ -98,6 +98,8 @@ void	sort_algo(t_stack **a_stack, t_stack **b_stack)
 		return ;
 	i = 0;
 	count = ps_lstsize(*a_stack);
+	if (count < 10)
+		chunk_amount = 1;
 	if (count > 100)
 		chunk_amount = count / 30;
 	else
