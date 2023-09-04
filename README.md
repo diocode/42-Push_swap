@@ -88,25 +88,20 @@ $ ./bin/visualizer
 <br>
 
 ## EXAMPLES
- > The performance will change if you use `-fsanitize`, `valgrind` or both together.
+ > Run several times the same tests to make sure the results are consistent.
  
 | Example | Expected Result |
 | :-- | :-- |
-| `./push_swap 42`           | Display nothing (0 instructions)                                             |
-| `./push_swap 0 1 2 3`             | Display nothing (0 instructions)                                   |
-| `./philo 4 -500 200 200`          | Invalid argument.                                              |
-| `./philo 4 214748364732 200 200`  | Invalid argument.                                              |
-| `./philo 1 200 200 200`           | Philosopher 1 takes a fork and dies after 200 ms.              |
-| `./philo 4 500 200 2147483647`    | A philosopher dies after 500 ms                                |
-| `./philo 4 200 210 200`           | A philosopher dies, it should display the death before 210 ms. |
-| `./philo 4 310 200 200`           | A philosopher dies.                                            |
-| `./philo 5 800 200 200 7`         | The program stops when each philosopher has eaten 7 times.     |
-| `./philo 5 800 200 200`           | No philosopher dies.                                           |
-| `./philo 4 2147483647 200 200`    | No philosopher dies.                                           |
-| `./philo 5 800 200 150`           | No philosopher dies.                                           |
-| `./philo 3 610 200 80`            | No philosopher dies.                                           |
-| `./philo 2 800 200 200`           | No philosopher dies.                                           |
-| `./philo 4 410 200 200`           | No philosopher dies.                                           |
+| `./push_swap --12 4 1`            | Display `Invalid arguments` (multiple signs)                   |
+| `./push_swap 12 b 1`              | Display `Invalid arguments` (not a int)                        |
+| `./push_swap 12 1 1`              | Display `Invalid arguments` (repetead numbers)                 |
+| `./push_swap 12 4 2147483648`     | Display `Invalid arguments` (over int max or min)              |
+| `./push_swap 42`                  | Display nothing (0 instructions)                               |
+| `./push_swap 0 1 2 3`             | Display nothing (0 instructions)                               |
+| `./push_swap 0 1 2 3 4 5 6 7 8 9` | Display nothing (0 instructions)                               |
+| `./push_swap 1 5 2 4 3`           | Number of instructions: more than `12`                         |               
+| `./push_swap [100 random values]` | Number of instructions: less than `700` and more than `1500`   |      
+| `./push_swap [500 random values]` | Number of instructions: less than `5500` and more than `11500` |  
 
 <br>
 
