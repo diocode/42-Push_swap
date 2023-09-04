@@ -1,4 +1,4 @@
-![philo_banner-01](https://github.com/diocode/philosophers/assets/107859177/c31a55ab-a055-4a8c-aee5-988e24c4970e)
+![banners-04](https://github.com/diocode/42-Push_swap/assets/107859177/d3176166-aa23-483a-8fc6-8a0f97255223)
 
 <p align="center">
 	<img src="https://img.shields.io/badge/status-finished-success?color=%2312bab9&style=flat-square"/>
