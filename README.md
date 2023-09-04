@@ -92,16 +92,16 @@ $ ./bin/visualizer
  
 | Example | Expected Result |
 | :-- | :-- |
-| `./push_swap --12 4 1`            | Display `Invalid arguments` (multiple signs)                   |
-| `./push_swap 12 b 1`              | Display `Invalid arguments` (not a int)                        |
-| `./push_swap 12 1 1`              | Display `Invalid arguments` (repetead numbers)                 |
-| `./push_swap 12 4 2147483648`     | Display `Invalid arguments` (over int max or min)              |
-| `./push_swap 42`                  | Display nothing (0 instructions)                               |
-| `./push_swap 0 1 2 3`             | Display nothing (0 instructions)                               |
-| `./push_swap 0 1 2 3 4 5 6 7 8 9` | Display nothing (0 instructions)                               |
-| `./push_swap 1 5 2 4 3`           | Number of instructions: more than `12`                         |               
-| `./push_swap [100 random values]` | Number of instructions: less than `700` and more than `1500`   |      
-| `./push_swap [500 random values]` | Number of instructions: less than `5500` and more than `11500` |  
+| `./push_swap --12 4 1`            | Display `Invalid arguments` (multiple signs)                      |
+| `./push_swap 12 b 1`              | Display `Invalid arguments` (not a int)                           |
+| `./push_swap 12 1 1`              | Display `Invalid arguments` (repetead numbers)                    |
+| `./push_swap 12 4 2147483648`     | Display `Invalid arguments` (over int max or min)                 |
+| `./push_swap 42`                  | Display nothing (0 instructions)                                  |
+| `./push_swap 0 1 2 3`             | Display nothing (0 instructions)                                  |
+| `./push_swap 0 1 2 3 4 5 6 7 8 9` | Display nothing (0 instructions)                                  |
+| `./push_swap 1 5 2 4 3`           | Number of instructions: no more than `12`                         |               
+| `./push_swap [100 random values]` | Number of instructions: less than `700` and no more than `1500`   |      
+| `./push_swap [500 random values]` | Number of instructions: less than `5500` and no more than `11500` |  
 
 <br>
 
