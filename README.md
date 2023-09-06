@@ -78,8 +78,8 @@ $ ./mkdir build
 ```
 4º - Inside build:
 ```bash
-$ ./mkdir cmake ..
-$ ./mkdir make
+$ ./cmake ..
+$ ./make
 ```
 5º - Run the visualizer
 ```bash
